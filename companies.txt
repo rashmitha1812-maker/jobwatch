@@ -1,0 +1,75 @@
+
+
+	1. ADM: https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25416&siteid=5429&PageType=searchResults&SearchType=linkquery&LinkID=4393911#keyWordSearch=student
+	2. DNV: https://jobs.dnv.com/job-search?country%5B0%5D=Germany&position_type%5B0%5D=Part%20Time&position_type%5B1%5D=Full%20Time&query=student
+	3. Tennet: https://careers.tennet.eu/en_US/careers/SearchJobs/?548=%5B7344%2C7341%2C7337%2C7342%2C7338%2C7339%2C7343%2C7336%2C1034206%5D&548_format=2793&listFilterMode=1&jobSort=schemaField_3_121_3&jobSortDirection=ASC&jobRecordsPerPage=6&
+	4. Dress ad Sommer: https://career.dreso.com/de/en/job-opportunities#entrylevel=53259c56-48bf-4716-8bf1-f3b8e62f84ce&jobarea=&country=&city=&timelimit=&corporateGroup=&query=
+	5. Arcadis: https://jobs.arcadis.com/careers?domain=arcadis.com&query=werkstudent&start=0&location=germany&pid=563671529977622&sort_by=relevance&filter_include_remote=1
+	6. WSP: https://www.wsp.com/de-de/karriere/stellenangebote?query=WERKSTUDENT&country=DE
+	7. Ramboll: https://www.ramboll.com/careers?locations=germany&career-stage=early-careers&free-text=werkstudent
+	8. Jacobs: http://careers.jacobs.com/en_US/careers/SearchJobs/werkstudent?4182=%5B76390%5D&4182_format=4422&listFilterMode=1&jobRecordsPerPage=10&
+	9. Sweco: https://www.sweco-gmbh.de/karriere/offene-stellen/?ppp=10&vacancies_level=6,5
+	10. Mott MacDonald: https://www.mottmac.com/en-europe/careers/explore-our-careers/?take=12&country=Germany
+	11. Fichtner: https://www.karriere.fichtner.de/stellenportal?filter[contractTypes]=2
+	12. Dorsch Gruppe: https://www.dorsch.com/de/karriere/jobs-in-deutschland/stellenangebote.html
+	13. INROS LACKNER: https://www.inros-lackner.de/en/career/job-vacancies
+	14. Björnsen Beratende Ingenieure: https://www.bjoernsen.de/karriere#praktikum=praktikum#studentischehilfskraft=studentischehilfskraft
+	15. IPROconsult: https://www.iproconsult.com/de/karriere/stellenangebote-und-bewerbungsprozess
+	16. Lahmeyer: http://dornier-group.com/en/career/job-vacancies/
+	17. HOCHTIEF AG: https://www.hochtief.de/karriere/studierende
+	18. Züblin STRABAG: https://jobboerse.strabag.at/jobs-overview.php?search=werkstudent
+	19. PORR: https://career.porr-group.com/jobs?q=werkstudent&tx_solr%5Bfilter%5D%5B0%5D=country%3AGermany#tx-solr-results 
+	20. HAMBURG WASSER: https://www.hamburgwasser.de/karriere/offene-stellen?einstieg=studierende#c1412
+	21. https://www.bjoernsen.de/karriere
+	22. Emschergenossenschaft: https://recruitingapp-5115.de.umantis.com/Jobs/1?lang=ger&CompanyID=1&Reset=G&ContentOnly=
+	23. Veolia Deutschland: https://jobs.veolia.de/stellenangebote.html?utm_source=veolia_de_karriere&utm_medium=referral
+	24. SUEZ Deutschland: https://hris-suez.csod.com/ux/ats/careersite/10/home?c=hris-suez&lq=Germany&lang=en-GB
+	25. BAM Deutschland: https://www.bam.de/Navigation/EN/About-us/Jobs-and-Careers/Young-Science/students/Bachelor-master-thesis-internships/bachelor-master-thesis-internships.html
+	26. Gelsenwasser: https://www.gelsenwasser.de/unternehmen/arbeiten-bei-gelsenwasser/stellenangebote
+	27. Hapag-Lloyd Research: https://www.hapag-lloyd.com/en/company/career/vacancies/jobsearch.html
+	28. Fugro Germany: https://www.fugro.com/careers/jobs?searchTerm=WERKSTUDENT 
+	29. Ökoplan : https://job.bhf-ki.de/#jobs
+	30. Hydrotec: https://www.hydrotec.com/de/jobs-und-karriere 
+	31. AECOM: https://aecom.jobs/locations/deu/jobs/
+	32. Energy Office AG: https://www.energiekontor.de/karriere/studentinnen-und-praktikantinnen-wind-in-bremen.html
+	33. Frenzelit GmbH: https://jobs.frenzelit.com/go/Studenten-&-Absolventen/8633702/
+	34. HAMBURG WASSER: https://www.hamburgwasser.de/karriere/offene-stellen?einstieg=studierende#c1412
+	35. Royal HaskoningDHV: https://www.haskoning.com/en/careers/vacancies?resultsPerPage=20&selectedFilters=country%3BGermany&pageNumber=1
+	36. McKinsey: http://mckinsey.com/careers/search-jobs?countries=Germany&query=intern
+	37. Peschla + Rochmes GmbH: https://www.gpr.de/karriere/stellenangebote/
+	38. ACCON GmbH: https://www.accon.de/ 
+	39.  Roland Berger: https://www.rolandberger.com/de/Join/All-Jobs/
+	40. Umweltcluster Bayern: https://www.umweltcluster.net/de/mitglieder/jobportal.html 
+	41. Clevercity: https://www.cleverciti.com/en/careers#freshteam-widget
+	42. Climate Alliance: https://www.climatealliance.org/about-us/carreers/
+	43. DEKRA: https://careers.dekra.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_country=DE&optionsFacetsDD_facility=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield5=
+	44. Dornier: https://www.dornier-group.com/en/career/job-vacancies/
+	45. Ecofys : https://www.agora-energiewende.de/ueber-uns/ihre-karriere-bei-agora-energiewende#c372
+	46. Fraunhofer IAO: https://jobs.fraunhofer.de/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=Studentische+Hilfskr%C3%A4fte&optionsFacetsDD_customfield2=&optionsFacetsDD_customfield3=&optionsFacetsDD_customfield5=Hamburg&optionsFacetsDD_customfield4=&optionsFacetsDD_lang=&locale=en_US
+	47. Frost & Sullivan: https://frostsullivan.bamboohr.com/careers
+	48. Ghorfa: https://www.ghorfa.de/de/stellenangebote/praktika/
+	49. Railistics GmbH: https://railistics.com/de/ueber-uns/karriere/
+	50. adelphi.: https://adelphi.de/en/career#jobs
+	51. GFA: https://www.gfa-group.de/jobs/index.html
+	52. Eurofins: https://careers.eurofins.com/de/jobs/ 
+	53. BCE Ingenieurgesellschaft: https://bce-ing.de/stellenangebote.html
+	54. Hölscher Wasserbau GmbH: https://www.hoelscher-wasserbau.de/de/karriere/stellenangebote/
+	55. Forschungszentrum Jülich: https://www.fz-juelich.de/de/karriere/stellenangebote?targetGroup=studierende
+	56. Stadtentwässerungsbetriebe Köln: https://steb-koeln.de/karriere/aktuelle-stellenausschreibungen/aktuelle-stellenausschreibungen-detailseite.jsp?jobid=251
+	57. Fichtner Water & Transportation GmbH: https://www.karriere.fichtner.de/stellenportal?filter[countries]=24&filter[contractTypes]=2
+	58. Fugro Germany Land GmbH: https://www.fugro.com/careers/jobs?locations.countries=Germany&timeType=Part%20time,Full%20time
+	59. BWS GmbH : https://bws-gmbh.de/jobs/
+	60. Umwelttechnik & Wasserbau GmbH: https://karriere.uw.de/jobs
+	61. NAUE GmbH & Co. KG: https://career.naue.com/#jobs:careerLevel=%5B%22Student%2Fin%22%2C%22Auszubildende%22%5D
+	62. Felbermayr Wasserbau Division: https://karriere.felbermayr.de/stellenboerse/?search=&area=&state=&company=
+	63. Strabag Wasserbau GmbH: https://jobboerse.strabag.at/jobs-overview.php?language=DE_EN
+	64. HYDRO‑Ingenieure Energie & Wasser GmbH: https://www.hydro-ingenieure.de/karriere/stellenangebote/
+	65. WESSLING GmbH: https://career.als-germany.com/
+	66. M&P Water Engineering Company: https://job.siera-alliance.com/karriere/
+	67. Depenbrock Ingenieur‑ & Wasserbau: https://depenbrock.de/karriere/ 
+	68. JH AG: https://www.jungheinrich.com/karriere/jobs 
+	69. Köster GmbH: https://www.koester-bau.de/karriere/stellenangebote.html
+	70. GETEC Energie: https://getec-energie-gmbh.jobs.personio.de/?filters=eyJlbXBsb3ltZW50X3R5cGUiOlsid29ya2luZ19zdHVkZW50Il19
+	71. NOTUS energy Plan GmbH & Co.KG: https://notus-portal.rexx-systems.com/
+	72. rhenag Rheinische Energie AG: https://karriere.rhenag.de/#jobs
+Airbus: https://ag.wd3.myworkdayjobs.com/en-US/Airbus/details/Werkstudent--d-m-w--im-Business-Controlling_JR10395567-1?q=werkstudent&locations=f5811cef9cb501dc098bf16a4c0ae54a&locationCountry=dcc5b7608d8644b3a93716604e78e995

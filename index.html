@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Job Watch</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#ddd;--acc:#0a6cff;--new:#e8f7ec}
+@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#eee;--mut:#999;--line:#333;--acc:#6aa8ff;--new:#1c3326}}
+body{font:15px system-ui,sans-serif;background:var(--bg);color:var(--fg);max-width:960px;margin:0 auto;padding:16px}
+input,select{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.job{padding:10px;border-bottom:1px solid var(--line)}
+.job.new{background:var(--new)}a{color:var(--acc)}.m{color:var(--mut);font-size:13px}.bad{color:#d33}
+details{margin-top:24px}
+</style></head><body>
+<h1>Job Watch</h1><div class="m" id="upd">Loading…</div>
+<div class="row"><input id="q" placeholder="Filter keyword"><select id="c"><option value="">All companies</option></select>
+<label><input type="checkbox" id="n"> New only</label></div>
+<div id="list"></div>
+<details><summary>Company status</summary><div id="st"></div></details>
+<script>
+let db;const $=id=>document.getElementById(id);
+const ago=t=>{const m=(Date.now()-new Date(t))/6e4;return m<60?Math.round(m)+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" d ago"};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function load(){
+ try{db=await (await fetch("data/jobs.json?t="+Date.now())).json()}catch(e){$("upd").textContent="Could not load data";return}
+ const st=Object.entries(db.status);
+ $("upd").textContent=st.length?"Last check: "+ago(st[0][1].checked):"No data yet";
+ const sel=$("c"),cur=sel.value;sel.innerHTML='<option value="">All companies</option>'+st.map(([n])=>`<option>${esc(n)}</option>`).join("");sel.value=cur;
+ $("st").innerHTML=st.map(([n,s])=>`<div class="m">${s.ok?"✓":'<span class="bad">✗</span>'} ${esc(n)} — ${s.count} matches${s.ok?"":" — "+esc(s.error||"")}</div>`).join("");
+ render();
+}
+function render(){
+ const q=$("q").value.toLowerCase(),c=$("c").value,n=$("n").checked;
+ const rows=Object.entries(db.jobs).map(([u,j])=>({u,...j,isNew:j.first_seen>db.baseline}))
+  .filter(j=>(!c||j.company===c)&&(!n||j.isNew)&&(!q||(j.title+j.company).toLowerCase().includes(q)))
+  .sort((a,b)=>b.first_seen.localeCompare(a.first_seen));
+ $("list").innerHTML=rows.map(j=>`<div class="job${j.isNew?" new":""}"><a href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a><div class="m">${esc(j.company)} · first seen ${ago(j.first_seen)}</div></div>`).join("")||'<p class="m">Nothing matches.</p>';
+}
+["q","c","n"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
+load();setInterval(load,5*6e4);
+</script></body></html>
