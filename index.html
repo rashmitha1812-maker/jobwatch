@@ -11,7 +11,7 @@ details{margin-top:24px}
 </style></head><body>
 <h1>Job Watch</h1><div class="m" id="upd">Loading…</div>
 <div class="row"><input id="q" placeholder="Filter keyword"><select id="c"><option value="">All companies</option></select>
-<label><input type="checkbox" id="n"> New only</label></div>
+<label><input type="checkbox" id="n"> New only</label> <label><input type="checkbox" id="m" checked> CV match only</label></div>
 <div id="list"></div>
 <details><summary>Company status</summary><div id="st"></div></details>
 <script>
@@ -27,12 +27,14 @@ async function load(){
  render();
 }
 function render(){
- const q=$("q").value.toLowerCase(),c=$("c").value,n=$("n").checked;
- const rows=Object.entries(db.jobs).map(([u,j])=>({u,...j,isNew:j.first_seen>db.baseline}))
-  .filter(j=>(!c||j.company===c)&&(!n||j.isNew)&&(!q||(j.title+j.company).toLowerCase().includes(q)))
-  .sort((a,b)=>b.first_seen.localeCompare(a.first_seen));
- $("list").innerHTML=rows.map(j=>`<div class="job${j.isNew?" new":""}"><a href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a><div class="m">${esc(j.company)} · first seen ${ago(j.first_seen)}</div></div>`).join("")||'<p class="m">Nothing matches.</p>';
+ const q=$("q").value.toLowerCase(),c=$("c").value,n=$("n").checked,m=$("m").checked;
+ const all=Object.entries(db.jobs).map(([u,j])=>({u,...j,isNew:j.first_seen>db.baseline,k:(j.matches||[]).length}));
+ const pend=all.filter(j=>!j.matches).length;
+ const rows=all.filter(j=>(!c||j.company===c)&&(!n||j.isNew)&&(!m||j.k>0)&&(!q||(j.title+j.company).toLowerCase().includes(q)))
+  .sort((a,b)=>b.k-a.k||b.first_seen.localeCompare(a.first_seen));
+ const html=rows.map(j=>`<div class="job${j.isNew?" new":""}"><a href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a><div class="m">${esc(j.company)} · first seen ${ago(j.first_seen)}</div>${j.k?`<div class="m">Matches: ${j.matches.map(esc).join(", ")}</div>`:""}</div>`).join("");
+ $("list").innerHTML=(pend?`<p class="m">${pend} jobs not yet checked against your skills (40 are checked per run).</p>`:"")+(html||'<p class="m">Nothing matches.</p>');
 }
-["q","c","n"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
+["q","c","n","m"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
 load();setInterval(load,5*6e4);
 </script></body></html>

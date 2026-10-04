@@ -1,11 +1,15 @@
 """Checks every career page in companies.txt, records matching job links in data/jobs.json."""
-import asyncio, json, re, sys, pathlib
+import asyncio, json, re, sys, pathlib, hashlib
 from datetime import datetime, timezone
 from urllib.parse import urldefrag
 from playwright.async_api import async_playwright
 
 KEYWORDS = re.compile(r"werkstudent|working.?student|student|praktik|intern(ship)?\b|thesis|abschlussarbeit|hilfskraft|hiwi", re.I)
 OUT = pathlib.Path("data/jobs.json")
+_sk = pathlib.Path("skills.txt")
+SKILLS = [l.strip() for l in _sk.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")] if _sk.exists() else []
+SKILL_RE = [(k, re.compile(r"\b" + re.escape(k), re.I)) for k in SKILLS]
+MAX_SCORE = 40
 LINE = re.compile(r"^\s*(?:\d+\.\s*)?(?:(.+?)\s*:\s*)?(https?://\S+)")
 
 def load_companies():
@@ -39,10 +43,41 @@ async def check(ctx, sem, name, url):
         finally:
             await page.close()
 
+async def score(ctx, sem, href):
+    async with sem:
+        page = await ctx.new_page()
+        try:
+            await page.goto(href, timeout=30000, wait_until="domcontentloaded")
+            try: await page.wait_for_load_state("networkidle", timeout=6000)
+            except Exception: pass
+            text = await page.inner_text("body")
+            return href, [k for k, r in SKILL_RE if r.search(text)]
+        except Exception:
+            return href, None
+        finally:
+            await page.close()
+
+async def score_pending(db):
+    pend = [h for h, j in db["jobs"].items() if "matches" not in j]
+    pend = sorted(pend, key=lambda h: db["jobs"][h].get("tries", 0))[:MAX_SCORE]
+    if not pend or not SKILL_RE: return
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        ctx = await browser.new_context(user_agent="Mozilla/5.0 (jobwatch personal)")
+        sem = asyncio.Semaphore(6)
+        for href, m in await asyncio.gather(*(score(ctx, sem, h) for h in pend)):
+            if m is None: db["jobs"][href]["tries"] = db["jobs"][href].get("tries", 0) + 1
+            else: db["jobs"][href]["matches"] = m
+        await browser.close()
+
 async def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     db = json.loads(OUT.read_text()) if OUT.exists() else {"baseline": now, "jobs": {}, "status": {}}
     db["baseline"] = db.get("baseline") or now
+    sh = hashlib.md5("\n".join(SKILLS).encode()).hexdigest()
+    if db.get("skills_hash") != sh:
+        for j in db["jobs"].values(): j.pop("matches", None)
+        db["skills_hash"] = sh
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         ctx = await browser.new_context(user_agent="Mozilla/5.0 (jobwatch personal)")
@@ -55,6 +90,7 @@ async def main():
         for href, title in jobs.items():
             j = db["jobs"].setdefault(href, {"company": name, "title": title, "first_seen": now})
             j["last_seen"] = now
+    await score_pending(db)
     OUT.write_text(json.dumps(db, ensure_ascii=False, indent=1))
     print(f"{len(db['jobs'])} jobs, {sum(not s['ok'] for s in db['status'].values())} failing")
 

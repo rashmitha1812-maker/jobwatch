@@ -1,0 +1,52 @@
+# One skill or keyword per line (English or German). Lines starting with # are ignored.
+# A job is shown as a "CV match" if its page contains at least one of these.
+# Delete anything that is not on your CV and add your own.
+coastal
+küsten
+wave
+wellen
+hydraulic
+hydraulik
+hydrodynamic
+hydrologie
+hydrology
+flume
+sediment
+erosion
+flood
+hochwasser
+wasserbau
+water resources
+offshore
+harbour
+harbor
+hafen
+CFD
+numerical model
+numerische
+modellierung
+Delft3D
+SWAN
+OpenFOAM
+HEC-RAS
+PIV
+particle image
+image processing
+bildverarbeitung
+computer vision
+machine learning
+maschinelles lernen
+deep learning
+neural network
+segmentation
+Python
+MATLAB
+GIS
+data analysis
+datenanalyse
+laboratory
+labor
+experiment
+versuch
+messtechnik
+measurement
