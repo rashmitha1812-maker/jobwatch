@@ -1,22 +1,30 @@
 name: check-jobs
 on:
-  schedule: [{cron: "*/15 * * * *"}]
+  schedule: [{cron: "*/10 * * * *"}]
   workflow_dispatch:
-concurrency: check-jobs
+concurrency:
+  group: check-jobs
+  cancel-in-progress: false
 permissions: {contents: write}
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
       - run: pip install playwright && playwright install --with-deps chromium
-      - run: python checker.py
-      - run: |
+      - name: run checker
+        continue-on-error: true
+        run: |
+          mkdir -p data
+          python -u checker.py 2>&1 | tee data/run.log
+      - name: save results
+        if: always()
+        run: |
           git config user.name jobwatch && git config user.email jobwatch@users.noreply.github.com
-          git add data/jobs.json
+          git add data/jobs.json data/run.log
           git diff --staged --quiet || {
             git commit -m "update jobs"
             for i in 1 2 3; do
