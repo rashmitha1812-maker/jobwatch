@@ -12,7 +12,7 @@ SKILL_RE = [(k, re.compile(r"\b" + re.escape(k), re.I)) for k in SKILLS]
 _rl = pathlib.Path("roles.txt")
 ROLES = [l.strip() for l in _rl.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")] if _rl.exists() else []
 ROLE_RE = [(k, re.compile(r"\b" + re.escape(k), re.I)) for k in ROLES]
-MAX_SCORE = 40
+MAX_SCORE = 60
 BAD_TITLE = re.compile(r"^(skip to|jump to|jetzt bewerben|top of page|go to|zum inhalt|nach oben|to the glossary|more information|view vacancy:?$)", re.I)
 LINE = re.compile(r"^\s*(?:\d+\.\s*)?(?:(.+?)\s*:\s*)?(https?://\S+)")
 
@@ -47,6 +47,12 @@ async def check(ctx, sem, name, url):
         finally:
             await page.close()
 
+def clean(text, n=1500):
+    """Readable excerpt of a job page: collapse blank space, drop very short menu lines."""
+    lines = [re.sub(r"\s+", " ", l).strip() for l in text.splitlines()]
+    lines = [l for l in lines if len(l) > 25 or l.endswith(":")]
+    return "\n".join(lines)[:n]
+
 async def score(ctx, sem, href):
     async with sem:
         page = await ctx.new_page()
@@ -54,15 +60,23 @@ async def score(ctx, sem, href):
             await page.goto(href, timeout=30000, wait_until="domcontentloaded")
             try: await page.wait_for_load_state("networkidle", timeout=6000)
             except Exception: pass
-            text = await page.inner_text("body")
-            return href, [k for k, r in SKILL_RE if r.search(text)]
+            text = ""
+            for sel in ("main", "article", "[role=main]", "body"):
+                try:
+                    t = await page.inner_text(sel, timeout=3000)
+                except Exception:
+                    continue
+                if len(t.strip()) > 300 or sel == "body":
+                    text = t
+                    break
+            return href, [k for k, r in SKILL_RE if r.search(text)], clean(text)
         except Exception:
-            return href, None
+            return href, None, ""
         finally:
             await page.close()
 
 async def score_pending(db):
-    pend = [h for h, j in db["jobs"].items() if "matches" not in j]
+    pend = [h for h, j in db["jobs"].items() if "matches" not in j or "desc" not in j]
     pend = sorted(pend, key=lambda h: db["jobs"][h].get("tries", 0))[:MAX_SCORE]
     if not pend or not SKILL_RE: return
     async with async_playwright() as p:
@@ -73,9 +87,11 @@ async def score_pending(db):
             res = await asyncio.wait_for(asyncio.gather(*(score(ctx, sem, h) for h in pend)), 150)
         except Exception:
             res = []
-        for href, m in res:
+        for href, m, desc in res:
             if m is None: db["jobs"][href]["tries"] = db["jobs"][href].get("tries", 0) + 1
-            else: db["jobs"][href]["matches"] = m
+            else:
+                db["jobs"][href]["matches"] = m
+                db["jobs"][href]["desc"] = desc
         try: await asyncio.wait_for(browser.close(), 20)
         except Exception: pass
 
