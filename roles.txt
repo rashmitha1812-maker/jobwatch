@@ -1,0 +1,43 @@
+# Job-title keywords (English or German). One per line. Lines starting with # are ignored.
+# A job whose TITLE contains one of these is shown as a "role match", even if its page has none of your skills.
+# Project management
+projektmanagement
+project management
+projektleit
+projektassistenz
+projektkoordination
+project coordinator
+project engineer
+projektingenieur
+bauleitung
+# Environment
+umwelt
+environment
+nachhaltig
+sustainab
+klimaschutz
+climate
+ESG
+immissionsschutz
+genehmigung
+permitting
+altlasten
+kreislaufwirtschaft
+abfall
+wasserwirtschaft
+gewässer
+naturschutz
+landschaftsplanung
+UVP
+# HSE and safety
+HSE
+HSEQ
+EHS
+arbeitssicherheit
+arbeitsschutz
+health and safety
+sicherheit
+# Energy and quality
+energiemanagement
+qualitätsmanagement
+compliance

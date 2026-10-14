@@ -4,12 +4,16 @@ from datetime import datetime, timezone
 from urllib.parse import urldefrag
 from playwright.async_api import async_playwright
 
-KEYWORDS = re.compile(r"werkstudent|working.?student|student|praktik|intern(ship)?\b|thesis|abschlussarbeit|hilfskraft|hiwi", re.I)
+KEYWORDS = re.compile(r"werkstudent|working.?student|student|praktik|intern(ship)?\b|thesis|abschlussarbeit|hilfskraft|hiwi|berufseinsteig|einsteiger|trainee|absolvent|graduate|nachwuchs|junior|entry.?level", re.I)
 OUT = pathlib.Path("data/jobs.json")
 _sk = pathlib.Path("skills.txt")
 SKILLS = [l.strip() for l in _sk.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")] if _sk.exists() else []
 SKILL_RE = [(k, re.compile(r"\b" + re.escape(k), re.I)) for k in SKILLS]
+_rl = pathlib.Path("roles.txt")
+ROLES = [l.strip() for l in _rl.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")] if _rl.exists() else []
+ROLE_RE = [(k, re.compile(r"\b" + re.escape(k), re.I)) for k in ROLES]
 MAX_SCORE = 40
+BAD_TITLE = re.compile(r"^(skip to|jump to|jetzt bewerben|top of page|go to|zum inhalt|nach oben|to the glossary|more information|view vacancy:?$)", re.I)
 LINE = re.compile(r"^\s*(?:\d+\.\s*)?(?:(.+?)\s*:\s*)?(https?://\S+)")
 
 def load_companies():
@@ -28,14 +32,14 @@ async def check(ctx, sem, name, url):
     async with sem:
         page = await ctx.new_page()
         try:
-            await page.goto(url, timeout=45000, wait_until="domcontentloaded")
-            try: await page.wait_for_load_state("networkidle", timeout=10000)
+            await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+            try: await page.wait_for_load_state("networkidle", timeout=5000)
             except Exception: pass
             links = await page.eval_on_selector_all(
                 "a[href]", "els => els.map(e => [e.innerText.trim().replace(/\\s+/g,' '), e.href])")
             jobs = {}
             for text, href in links:
-                if text and len(text) > 8 and (KEYWORDS.search(text) or KEYWORDS.search(href)):
+                if text and len(text) > 8 and "#" not in href and not href.startswith("javascript") and not BAD_TITLE.search(text) and (KEYWORDS.search(text) or KEYWORDS.search(href)):
                     jobs[href] = text[:160]
             return name, url, jobs, None
         except Exception as e:
@@ -64,11 +68,16 @@ async def score_pending(db):
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         ctx = await browser.new_context(user_agent="Mozilla/5.0 (jobwatch personal)")
-        sem = asyncio.Semaphore(6)
-        for href, m in await asyncio.gather(*(score(ctx, sem, h) for h in pend)):
+        sem = asyncio.Semaphore(8)
+        try:
+            res = await asyncio.wait_for(asyncio.gather(*(score(ctx, sem, h) for h in pend)), 150)
+        except Exception:
+            res = []
+        for href, m in res:
             if m is None: db["jobs"][href]["tries"] = db["jobs"][href].get("tries", 0) + 1
             else: db["jobs"][href]["matches"] = m
-        await browser.close()
+        try: await asyncio.wait_for(browser.close(), 20)
+        except Exception: pass
 
 async def main():
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -81,16 +90,30 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         ctx = await browser.new_context(user_agent="Mozilla/5.0 (jobwatch personal)")
-        sem = asyncio.Semaphore(6)
-        results = await asyncio.gather(*(check(ctx, sem, n, u) for n, u in load_companies()))
-        await browser.close()
+        sem = asyncio.Semaphore(8)
+        comps = load_companies()
+        tasks = {asyncio.create_task(check(ctx, sem, n, u)): (n, u) for n, u in comps}
+        done, pending = await asyncio.wait(tasks, timeout=420)   # hard limit: 7 minutes
+        results = [t.result() for t in done]
+        for t in pending:
+            t.cancel()
+            n, u = tasks[t]
+            results.append((n, u, {}, "timed out (run too slow)"))
+        try: await asyncio.wait_for(browser.close(), 20)
+        except Exception: pass
     for name, url, jobs, err in results:
-        db["status"][name] = {"url": url, "checked": now, "ok": err is None, "error": err, "count": len(jobs)}
+        old = db["status"].get(name, {})
+        db["status"][name] = {"url": url, "checked": now, "ok": err is None, "error": err, "count": len(jobs) if not err else old.get("count", 0)}
         if err: continue
         for href, title in jobs.items():
             j = db["jobs"].setdefault(href, {"company": name, "title": title, "first_seen": now})
             j["last_seen"] = now
-    await score_pending(db)
+    for href, j in db["jobs"].items():      # role keywords are matched against the job title
+        j["roles"] = [k for k, r in ROLE_RE if r.search(j["title"])]
+    OUT.parent.mkdir(exist_ok=True)
+    OUT.write_text(json.dumps(db, ensure_ascii=False, indent=1))   # save first, so results are never lost
+    try: await score_pending(db)
+    except Exception as e: print("scoring skipped:", e)
     OUT.write_text(json.dumps(db, ensure_ascii=False, indent=1))
     print(f"{len(db['jobs'])} jobs, {sum(not s['ok'] for s in db['status'].values())} failing")
 
