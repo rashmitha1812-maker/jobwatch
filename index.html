@@ -1,42 +1,74 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Job Watch</title>
 <style>
-:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#ddd;--acc:#0a6cff;--new:#e8f7ec}
-@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#eee;--mut:#999;--line:#333;--acc:#6aa8ff;--new:#1c3326}}
-body{font:15px system-ui,sans-serif;background:var(--bg);color:var(--fg);max-width:960px;margin:0 auto;padding:16px}
-input,select{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.job{padding:10px;border-bottom:1px solid var(--line)}
-.job.new{background:var(--new)}a{color:var(--acc)}.m{color:var(--mut);font-size:13px}.bad{color:#d33}
-details{margin-top:24px}
-.job details{margin-top:6px}.job summary{cursor:pointer;color:var(--acc);font-size:13px}.desc{white-space:pre-wrap;font-size:13px;line-height:1.45;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:6px;max-height:320px;overflow:auto}
-</style></head><body>
-<h1>Job Watch</h1><div class="m" id="upd">Loading…</div>
-<div class="row"><input id="q" placeholder="Filter keyword"><select id="c"><option value="">All companies</option></select>
-<label><input type="checkbox" id="n"> New only</label> <label><input type="checkbox" id="m" checked> CV match only</label></div>
+:root{--bg:#f4f6f8;--card:#fff;--fg:#1a1d21;--mut:#5f6b7a;--line:#dfe3e8;--acc:#0a66c2;--new:#1a7f37;--chip:#eaf0f6}
+@media(prefers-color-scheme:dark){:root{--bg:#101316;--card:#1a1e23;--fg:#e8eaed;--mut:#9aa5b1;--line:#2b323a;--acc:#6aa8ff;--new:#3fb950;--chip:#262d36}}
+*{box-sizing:border-box}body{font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--fg);margin:0}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px}.sub{color:var(--mut);font-size:13px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;min-width:120px}
+.stat b{display:block;font-size:22px}.stat span{font-size:12px;color:var(--mut)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 14px}
+input,select{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit}
+input[type=search]{flex:1;min-width:170px}
+label.t{display:flex;align-items:center;gap:6px;font-size:14px;white-space:nowrap}
+.job{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.job.new{border-left:4px solid var(--new)}.job.gone{opacity:.55}
+a.ttl{font-weight:600;font-size:16px;color:var(--acc);text-decoration:none}a.ttl:hover{text-decoration:underline}
+.meta{color:var(--mut);font-size:13px;margin-top:2px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chip{background:var(--chip);border-radius:999px;padding:2px 9px;font-size:12px}.chip.role{outline:1px solid var(--acc)}
+.badge{background:var(--new);color:#fff;border-radius:6px;padding:1px 6px;font-size:11px;margin-right:6px;vertical-align:middle}
+details summary{cursor:pointer;color:var(--acc);font-size:13px;margin-top:8px}
+.desc{white-space:pre-wrap;font-size:13px;margin-top:6px;padding:10px;background:var(--bg);border-radius:8px;max-height:300px;overflow:auto}
+.bad{color:#d33}.m{color:var(--mut);font-size:13px}
+</style></head><body><div class="wrap">
+<h1>Job Watch</h1><div class="sub" id="upd">Loading…</div>
+<div class="stats" id="stats"></div>
+<div class="bar"><input type="search" id="q" placeholder="Search title or company">
+<select id="c"><option value="">All companies</option></select>
+<select id="a"><option value="0">Found: any time</option><option value="1">Last 24 hours</option><option value="7">Last 7 days</option></select>
+<label class="t"><input type="checkbox" id="m" checked> CV match only</label>
+<label class="t"><input type="checkbox" id="g"> Show closed</label></div>
 <div id="list"></div>
 <details><summary>Company status</summary><div id="st"></div></details>
-<script>
-let db;const $=id=>document.getElementById(id);
-const ago=t=>{const m=(Date.now()-new Date(t))/6e4;return m<60?Math.round(m)+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" d ago"};
-const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+</div><script>
+const $=id=>document.getElementById(id);let db;
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ago=t=>{if(!t)return"";const m=(Date.now()-new Date(t))/6e4;return m<2?"just now":m<60?Math.round(m)+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" d ago"};
+const BAD=/^(skip to|jump to|jetzt bewerben|top of page|go to|zum inhalt|nach oben|to the glossary|more information)/i;
+function prep(){const st=db.status||{};
+ return Object.entries(db.jobs||{}).filter(([u,j])=>!u.includes("#")&&!u.startsWith("javascript")&&!BAD.test(j.title||""))
+ .map(([u,j])=>{const s=st[j.company];return {u,...j,gone:!!(s&&s.ok&&s.checked>j.last_seen),isNew:j.first_seen>db.baseline,
+  k:(j.matches||[]).length+(j.roles||[]).length}});}
 async function load(){
  try{db=await (await fetch("data/jobs.json?t="+Date.now())).json()}catch(e){$("upd").textContent="Could not load data";return}
- const st=Object.entries(db.status);
- $("upd").textContent=st.length?"Last check: "+ago(st[0][1].checked):"No data yet";
+ const st=Object.entries(db.status||{});
+ const last=st.map(([,s])=>s.checked).sort().pop();
+ const r=db.run;
+ $("upd").textContent=last?("Last check "+ago(last)+(r?" · run took "+r.seconds+"s":"")):"No data yet";
  const sel=$("c"),cur=sel.value;sel.innerHTML='<option value="">All companies</option>'+st.map(([n])=>`<option>${esc(n)}</option>`).join("");sel.value=cur;
- $("st").innerHTML=st.map(([n,s])=>`<div class="m">${s.ok?"✓":'<span class="bad">✗</span>'} ${esc(n)} — ${s.count} matches${s.ok?"":" — "+esc(s.error||"")}</div>`).join("");
- render();
-}
+ $("st").innerHTML=st.sort((a,b)=>a[1].ok-b[1].ok).map(([n,s])=>`<div class="m">${s.ok?"✓":'<span class="bad">✗</span>'} ${esc(n)} — ${s.count} links${s.ok?"":" — "+esc(s.error||"")}</div>`).join("");
+ render();}
 function render(){
- const q=$("q").value.toLowerCase(),c=$("c").value,n=$("n").checked,m=$("m").checked;
- const bad=/^(skip to|jump to|jetzt bewerben|top of page|go to|zum inhalt|nach oben|to the glossary|more information)/i;
- const all=Object.entries(db.jobs).filter(([u,j])=>!u.includes("#")&&!u.startsWith("javascript")&&!bad.test(j.title)).map(([u,j])=>({u,...j,isNew:j.first_seen>db.baseline,k:(j.matches||[]).length+(j.roles||[]).length}));
- const pend=all.filter(j=>!j.matches).length;
- const rows=all.filter(j=>(!c||j.company===c)&&(!n||j.isNew)&&(!m||j.k>0)&&(!q||(j.title+j.company).toLowerCase().includes(q)))
+ const q=$("q").value.toLowerCase(),c=$("c").value,m=$("m").checked,g=$("g").checked,days=+$("a").value;
+ const all=prep(),cut=days?Date.now()-days*864e5:0;
+ const rows=all.filter(j=>(!c||j.company===c)&&(g||!j.gone)&&(!m||j.k>0)&&(!cut||new Date(j.first_seen)>cut)&&(!q||((j.title||"")+j.company+(j.loc||"")).toLowerCase().includes(q)))
   .sort((a,b)=>b.first_seen.localeCompare(a.first_seen)||b.k-a.k);
- const html=rows.map(j=>`<div class="job${j.isNew?" new":""}"><a href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a><div class="m">${esc(j.company)} · first seen ${ago(j.first_seen)} · still listed ${ago(j.last_seen)}</div>${(j.roles&&j.roles.length)?`<div class="m"><b>Role:</b> ${j.roles.map(esc).join(", ")}</div>`:""}${(j.matches&&j.matches.length)?`<div class="m">Skills: ${j.matches.map(esc).join(", ")}</div>`:""}${j.desc?`<details><summary>Show job text</summary><div class="desc">${esc(j.desc)}</div></details>`:""}</div>`).join("");
- $("list").innerHTML=(pend?`<p class="m">${pend} jobs not yet checked against your skills (40 are checked per run).</p>`:"")+(html||'<p class="m">Nothing matches.</p>');
-}
-["q","c","n","m"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
-load();setInterval(load,5*6e4);
+ const day=Date.now()-864e5;
+ const fails=Object.values(db.status||{}).filter(s=>!s.ok).length;
+ $("stats").innerHTML=`<div class="stat"><b>${all.filter(j=>new Date(j.first_seen)>day&&j.first_seen>db.baseline).length}</b><span>new in 24 h</span></div>
+ <div class="stat"><b>${all.filter(j=>!j.gone).length}</b><span>open postings</span></div>
+ <div class="stat"><b>${all.filter(j=>!j.gone&&j.k>0).length}</b><span>CV / role matches</span></div>
+ <div class="stat"><b class="${fails?"bad":""}">${fails}</b><span>companies failing</span></div>`;
+ const pend=all.filter(j=>!j.matches&&!j.unreadable).length;
+ const html=rows.map(j=>{const when=j.posted?("posted "+j.posted):("found "+ago(j.first_seen));
+  return `<div class="job${j.isNew?" new":""}${j.gone?" gone":""}">${j.isNew&&new Date(j.first_seen)>day?'<span class="badge">NEW</span>':""}<a class="ttl" href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a>
+  <div class="meta">${esc(j.company)}${j.loc?" · "+esc(j.loc):""} · ${when}${j.deadline?" · apply by "+esc(j.deadline):""}${j.gone?" · no longer listed":""}</div>
+  <div class="chips">${(j.roles||[]).map(x=>`<span class="chip role">${esc(x)}</span>`).join("")}${(j.matches||[]).map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>
+  ${j.desc?`<details><summary>Show job text</summary><div class="desc">${esc(j.desc)}</div></details>`:""}</div>`}).join("");
+ $("list").innerHTML=(pend?`<p class="m">${pend} postings are still being read (60 per run).</p>`:"")+(html||'<p class="m">Nothing matches these filters.</p>');}
+["q","c","a","m","g"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
+load();setInterval(load,3*6e4);
 </script></body></html>
