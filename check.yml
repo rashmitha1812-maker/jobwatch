@@ -17,4 +17,10 @@ jobs:
       - run: |
           git config user.name jobwatch && git config user.email jobwatch@users.noreply.github.com
           git add data/jobs.json
-          git diff --staged --quiet || (git commit -m "update jobs" && git push)
+          git diff --staged --quiet || {
+            git commit -m "update jobs"
+            for i in 1 2 3; do
+              git pull --rebase -X theirs origin main && git push && break
+              sleep 5
+            done
+          }
