@@ -23,12 +23,14 @@ a.ttl{font-weight:600;font-size:16px;color:var(--acc);text-decoration:none}a.ttl
 details summary{cursor:pointer;color:var(--acc);font-size:13px;margin-top:8px}
 .desc{white-space:pre-wrap;font-size:13px;margin-top:6px;padding:10px;background:var(--bg);border-radius:8px;max-height:300px;overflow:auto}
 .bad{color:#d33}.m{color:var(--mut);font-size:13px}
+.sec{font-size:12px;font-weight:700;margin:20px 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.star{color:#e3a008;margin-right:4px}
 </style></head><body><div class="wrap">
 <h1>Job Watch</h1><div class="sub" id="upd">Loading…</div>
 <div class="stats" id="stats"></div>
 <div class="bar"><input type="search" id="q" placeholder="Search title or company">
 <select id="c"><option value="">All companies</option></select>
 <select id="a"><option value="0">Found: any time</option><option value="1">Last 24 hours</option><option value="7">Last 7 days</option></select>
+<label class="t"><input type="checkbox" id="p"> ★ Priority only</label>
 <label class="t"><input type="checkbox" id="m" checked> CV match only</label>
 <label class="t"><input type="checkbox" id="g"> Show closed</label></div>
 <div id="list"></div>
@@ -49,26 +51,30 @@ async function load(){
  const r=db.run;
  $("upd").textContent=last?("Last check "+ago(last)+(r?" · run took "+r.seconds+"s":"")):"No data yet";
  const sel=$("c"),cur=sel.value;sel.innerHTML='<option value="">All companies</option>'+st.map(([n])=>`<option>${esc(n)}</option>`).join("");sel.value=cur;
- $("st").innerHTML=st.sort((a,b)=>a[1].ok-b[1].ok).map(([n,s])=>`<div class="m">${s.ok?"✓":'<span class="bad">✗</span>'} ${esc(n)} — ${s.count} links${s.ok?"":" — "+esc(s.error||"")}</div>`).join("");
+ $("st").innerHTML=st.sort((a,b)=>a[1].ok-b[1].ok).map(([n,s])=>`<div class="m">${s.ok?"✓":'<span class="bad">✗</span>'} ${s.priority?"★ ":""}${esc(n)} — ${s.count} links${s.ok?"":" — "+esc(s.error||"")}</div>`).join("");
  render();}
 function render(){
- const q=$("q").value.toLowerCase(),c=$("c").value,m=$("m").checked,g=$("g").checked,days=+$("a").value;
- const all=prep(),cut=days?Date.now()-days*864e5:0;
- const rows=all.filter(j=>(!c||j.company===c)&&(g||!j.gone)&&(!m||j.k>0)&&(!cut||new Date(j.first_seen)>cut)&&(!q||((j.title||"")+j.company+(j.loc||"")).toLowerCase().includes(q)))
+ const q=$("q").value.toLowerCase(),c=$("c").value,m=$("m").checked,g=$("g").checked,po=$("p").checked,days=+$("a").value;
+ const all=prep(),cut=days?Date.now()-days*864e5:0,day=Date.now()-864e5;
+ const rows=all.filter(j=>(!c||j.company===c)&&(g||!j.gone)&&(!po||j.priority)&&(!m||j.k>0||j.priority)&&(!cut||new Date(j.first_seen)>cut)&&(!q||((j.title||"")+j.company+(j.loc||"")).toLowerCase().includes(q)))
   .sort((a,b)=>b.first_seen.localeCompare(a.first_seen)||b.k-a.k);
- const day=Date.now()-864e5;
  const fails=Object.values(db.status||{}).filter(s=>!s.ok).length;
- $("stats").innerHTML=`<div class="stat"><b>${all.filter(j=>new Date(j.first_seen)>day&&j.first_seen>db.baseline).length}</b><span>new in 24 h</span></div>
- <div class="stat"><b>${all.filter(j=>!j.gone).length}</b><span>open postings</span></div>
+ const fresh=j=>j.isNew&&new Date(j.first_seen)>day;
+ $("stats").innerHTML=`<div class="stat"><b>${all.filter(j=>fresh(j)&&!j.gone).length}</b><span>new in 24 h</span></div>
+ <div class="stat"><b>${all.filter(j=>!j.gone&&j.priority).length}</b><span>★ priority postings</span></div>
  <div class="stat"><b>${all.filter(j=>!j.gone&&j.k>0).length}</b><span>CV / role matches</span></div>
  <div class="stat"><b class="${fails?"bad":""}">${fails}</b><span>companies failing</span></div>`;
  const pend=all.filter(j=>!j.matches&&!j.unreadable).length;
- const html=rows.map(j=>{const when=j.posted?("posted "+j.posted):("found "+ago(j.first_seen));
-  return `<div class="job${j.isNew?" new":""}${j.gone?" gone":""}">${j.isNew&&new Date(j.first_seen)>day?'<span class="badge">NEW</span>':""}<a class="ttl" href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.title)}</a>
+ const card=j=>{const when=j.posted?("posted "+j.posted):("found "+ago(j.first_seen));
+  return `<div class="job${j.isNew?" new":""}${j.gone?" gone":""}">${fresh(j)?'<span class="badge">NEW</span>':""}<a class="ttl" href="${esc(j.u)}" target="_blank" rel="noopener">${j.priority?'<span class="star">★</span>':""}${esc(j.title)}</a>
   <div class="meta">${esc(j.company)}${j.loc?" · "+esc(j.loc):""} · ${when}${j.deadline?" · apply by "+esc(j.deadline):""}${j.gone?" · no longer listed":""}</div>
   <div class="chips">${(j.roles||[]).map(x=>`<span class="chip role">${esc(x)}</span>`).join("")}${(j.matches||[]).map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>
-  ${j.desc?`<details><summary>Show job text</summary><div class="desc">${esc(j.desc)}</div></details>`:""}</div>`}).join("");
- $("list").innerHTML=(pend?`<p class="m">${pend} postings are still being read (60 per run).</p>`:"")+(html||'<p class="m">Nothing matches these filters.</p>');}
-["q","c","a","m","g"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
+  ${j.desc?`<details><summary>Show job text</summary><div class="desc">${esc(j.desc)}</div></details>`:""}</div>`};
+ const pri=rows.filter(j=>j.priority),rest=rows.filter(j=>!j.priority);
+ let out=pend?`<p class="m">${pend} postings are still being read (60 per run).</p>`:"";
+ if(pri.length)out+=`<div class="sec"><span class="star">★</span>Priority companies · ${pri.length}</div>`+pri.map(card).join("");
+ if(rest.length)out+=(pri.length?`<div class="sec">Other companies · ${rest.length}</div>`:"")+rest.map(card).join("");
+ $("list").innerHTML=out||'<p class="m">Nothing matches these filters.</p>';}
+["q","c","a","m","g","p"].forEach(i=>$(i).addEventListener("input",()=>db&&render()));
 load();setInterval(load,3*6e4);
 </script></body></html>

@@ -4,11 +4,12 @@ from datetime import datetime, timezone
 from urllib.parse import urldefrag, urlparse
 from playwright.async_api import async_playwright
 
-VERSION = "v3"
+VERSION = "v4"
 KEYWORDS = re.compile(r"werkstudent|working.?student|student|praktik|intern(ship)?\b|thesis|abschlussarbeit|hilfskraft|hiwi|berufseinsteig|einsteiger|trainee|absolvent|graduate|nachwuchs|junior|entry.?level", re.I)
 BAD_TITLE = re.compile(r"^(skip to|jump to|jetzt bewerben|top of page|go to|zum inhalt|nach oben|to the glossary|more information|view vacancy:?$)", re.I)
 JOBISH = re.compile(r"job|detail|posting|vacanc|requisition|position|stelle|[?&](id|jid|jobid|req\w*)=", re.I)
-LINE = re.compile(r"^\s*(?:\d+\.\s*)?(?:(.+?)\s*:\s*)?(https?://\S+)")
+LINE = re.compile(r"^\s*(\*)?\s*(?:\d+\.\s*)?(?:(.+?)\s*:\s*)?(https?://\S+)")   # a leading * marks a priority company
+JOBHREF = re.compile(r"/job/[^/?#]+|/jobs?/[^/?#]{6,}|jobdetail|job-detail|jobposting|FolderDetail|/details/\?id=|[?&](jobid|jid|id)=\d{4,}|/vacancies/[^/?#]+/|Offre/Detail", re.I)
 OUT = pathlib.Path("data/jobs.json")
 MAX_SCORE = 60
 MAX_TRIES = 4
@@ -29,11 +30,12 @@ def load_companies():
     for line in pathlib.Path("companies.txt").read_text(encoding="utf-8").splitlines():
         m = LINE.match(line)
         if not m: continue
-        name, url = (m.group(1) or "").strip(), m.group(2)
+        star, name, url = bool(m.group(1)), (m.group(2) or "").strip(), m.group(3)
         key = urldefrag(url)[0]
         if key in seen: continue
         seen.add(key)
-        items.append((name or re.sub(r"^https?://(www\.)?", "", url).split("/")[0], url))
+        items.append((name or re.sub(r"^https?://(www\.)?", "", url).split("/")[0], url, star))
+    items.sort(key=lambda x: not x[2])      # priority companies are checked first (stable sort)
     return items
 
 def clean(text, n=1500):
@@ -76,7 +78,7 @@ def jp_fields(jp):
             "posted": str(jp.get("datePosted") or "")[:10], "deadline": str(jp.get("validThrough") or "")[:10],
             "jdesc": "\n".join(l for l in lines if len(l) > 3)[:1500]}
 
-async def check(ctx, sem, name, url):
+async def check(ctx, sem, name, url, prio=False):
     base = urlparse(url)
     async with sem:
         page = await ctx.new_page()
@@ -90,7 +92,7 @@ async def check(ctx, sem, name, url):
             for text, href in links:
                 if not text or len(text) <= 8 or "#" in href or href.startswith("javascript"): continue
                 if BAD_TITLE.search(text): continue
-                if not (KEYWORDS.search(text) or KEYWORDS.search(href)): continue
+                if not (KEYWORDS.search(text) or KEYWORDS.search(href) or (prio and JOBHREF.search(href))): continue   # priority companies: keep every job link
                 u = urlparse(href)
                 if u.netloc == base.netloc and u.path == base.path and not JOBISH.search(u.query): continue  # filter/page link of the list itself
                 jobs[href] = text[:160]
@@ -129,7 +131,7 @@ async def score(ctx, sem, href):
 
 async def score_pending(db):
     pend = [h for h, j in db["jobs"].items() if ("matches" not in j or "desc" not in j) and j.get("tries", 0) < MAX_TRIES]
-    pend = sorted(pend, key=lambda h: db["jobs"][h].get("tries", 0))[:MAX_SCORE]
+    pend = sorted(pend, key=lambda h: (not db["jobs"][h].get("priority"), db["jobs"][h].get("tries", 0)))[:MAX_SCORE]
     if not pend or not SKILL_RE: return 0
     async with async_playwright() as p:
         browser = await p.chromium.launch()
@@ -162,12 +164,13 @@ async def main():
         for j in db["jobs"].values(): j.pop("matches", None)
         db["skills_hash"] = sh
     comps = load_companies()
+    prio = {n: p for n, u, p in comps}
     log("companies:", len(comps))
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         ctx = await browser.new_context(user_agent="Mozilla/5.0 (jobwatch personal)")
         sem = asyncio.Semaphore(8)
-        tasks = {asyncio.create_task(check(ctx, sem, n, u)): (n, u) for n, u in comps}
+        tasks = {asyncio.create_task(check(ctx, sem, n, u, p)): (n, u) for n, u, p in comps}
         done, pending = await asyncio.wait(tasks, timeout=420)
         results = [t.result() for t in done]
         for t in pending:
@@ -179,9 +182,9 @@ async def main():
     new = 0
     for name, url, jobs, err in results:
         old = db["status"].get(name, {})
-        db["status"][name] = {"url": url, "checked": now, "ok": err is None, "error": err,
+        db["status"][name] = {"url": url, "checked": now, "ok": err is None, "error": err, "priority": prio.get(name, False),
                               "count": len(jobs) if not err else old.get("count", 0)}
-        log("FAIL" if err else "ok  ", name, "-", err or f"{len(jobs)} links")
+        log("FAIL" if err else "ok  ", ("* " if prio.get(name) else "") + name, "-", err or f"{len(jobs)} links")
         if err: continue
         for href, title in jobs.items():
             if href not in db["jobs"]:
@@ -189,6 +192,7 @@ async def main():
             db["jobs"][href]["last_seen"] = now
     for j in db["jobs"].values():
         j["roles"] = [k for k, r in ROLE_RE if r.search(j["title"])]
+        j["priority"] = prio.get(j["company"], False)
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(db, ensure_ascii=False, indent=1))   # save first
     scored = 0
