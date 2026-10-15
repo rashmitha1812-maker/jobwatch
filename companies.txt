@@ -1,78 +1,80 @@
+# PRIORITY COMPANIES - a * at the start of a line marks a priority company.
+# Priority companies are checked first, show every job (not only CV matches) and appear at the top of the dashboard.
+* Nordex working students: https://jobs.nordex-online.com/search/?q=working+student
+* Nordex HSE: https://jobs.nordex-online.com/search/?q=hse
+* Nordex project management: https://jobs.nordex-online.com/search/?q=project+management
+* Nordex Hamburg: https://jobs.nordex-online.com/search/?q=&locationsearch=Hamburg
+* RWE jobs: https://www.rwe.com/en/rwe-careers-portal/job-offers/
+* RWE students: https://www.rwe.com/en/rwe-careers-portal/early-careers/undergraduate-and-student-opportunities/
+* Vattenfall Germany: https://careers.vattenfall.com/de/de/jobs
+* Hapag-Lloyd vacancies: https://hapaglloyd.softgarden.io/en/vacancies
+* Hapag-Lloyd interns: https://www.hapag-lloyd.com/en/company/career/working-ashore/students-interns/interns.html
+* Siemens Energy students: https://jobs.siemens-energy.com/en_US/CareersMarketplace/SearchJobsStudents
+* Siemens Energy Germany: https://jobs.siemens-energy.com/en_US/CareersMarketplace/searchJobsGermany
+* Siemens Gamesa: https://jobs.siemens-energy.com/en_US/jobs/Jobs/siemens%20gamesa?listFilterMode=1&folderRecordsPerPage=20
+* GEODIS Germany: https://injob.geodis.com/Pages/Offre/ListeOffre.aspx?lcid=1031&facet_Country=12881&mode=list
+* GEODIS softgarden: https://geodis.softgarden.io/
+* AECOM: https://aecom.jobs/locations/deu/jobs/
+* WSV federal waterways: https://karriere.bund.de/die-bundesverwaltung/behoerden-und-organisationen/wasserstrassen-und-schifffahrtsverwaltung-des-bundes/120
+* WSA Nord-Ostsee-Kanal: https://www.wsa-nord-ostsee-kanal.wsv.de/Webs/WSA/WSA-Nord-Ostsee-Kanal/DE/4_Das_WSA_NOK/3_Karriere/1_Stellen/stellen_node.html
+* WSA Weser-Jade-Nordsee: https://www.wsa-weser-jade-nordsee.wsv.de/Webs/WSA/Weser-Jade-Nordsee/DE/Weser-Jade-Nordsee/Karriere/karriere_node.html
+* Deutsche Bahn working students Hamburg: https://db.jobs/service/search/de-de/5441588?qli=true&query=werkstudent&sort=score&itemsPerPage=20&pageNum=0&country=Deutschland&state=Hamburg
+* Deutsche Bahn students: https://db.jobs/de-de/dein-einstieg/studierende
+* Hamburger Energienetze working students: https://www.hamburger-energienetze.de/karriere/karrierestart/berufsorientierung/studierende/werkstudierende
+* Hamburger Energienetze theses: https://www.hamburger-energienetze.de/karriere/karrierestart/berufsorientierung/studierende/abschluss-und-promotionsarbeiten
+* Hamburger Energienetze entry level: https://www.hamburger-energienetze.de/karriere/karrierestart/berufseinstieg
+* Stromnetz Hamburg jobs: https://jobs.stromnetz-hamburg.de/go/Jobs-f%C3%BCr-Werkstudenten/2866701/
+* Hamburger Energiewerke internships: https://www.hamburger-energiewerke.de/ueber-uns/karriere/praktika
 
+# Coastal, hydraulic and water engineering (existing, kept)
+Arcadis: https://jobs.arcadis.com/careers?domain=arcadis.com&query=werkstudent&start=0&location=germany&pid=563671529977622&sort_by=relevance&filter_include_remote=1
+WSP: https://www.wsp.com/de-de/karriere/stellenangebote?query=WERKSTUDENT&country=DE
+Ramboll: https://www.ramboll.com/careers?locations=germany&career-stage=early-careers&free-text=werkstudent
+Jacobs: http://careers.jacobs.com/en_US/careers/SearchJobs/werkstudent?4182=%5B76390%5D&4182_format=4422&listFilterMode=1&jobRecordsPerPage=10&
+Sweco: https://www.sweco-gmbh.de/karriere/offene-stellen/?ppp=10&vacancies_level=6,5
+Fichtner: https://www.karriere.fichtner.de/stellenportal?filter[countries]=24&filter[contractTypes]=2
+Mott MacDonald: https://www.mottmac.com/en-europe/careers/explore-our-careers/?take=12&country=Germany
+Dorsch Gruppe: https://www.dorsch.com/de/karriere/jobs-in-deutschland/stellenangebote.html
+INROS LACKNER: https://www.inros-lackner.de/en/career/job-vacancies
+Björnsen Beratende Ingenieure: https://www.bjoernsen.de/karriere#praktikum=praktikum#studentischehilfskraft=studentischehilfskraft
+HOCHTIEF AG: https://www.hochtief.de/karriere/studierende
+Züblin STRABAG: https://jobboerse.strabag.at/jobs-overview.php?search=werkstudent
+PORR: https://career.porr-group.com/jobs?q=werkstudent&tx_solr%5Bfilter%5D%5B0%5D=country%3AGermany#tx-solr-results
+Fugro Germany Land GmbH: https://www.fugro.com/careers/jobs?locations.countries=Germany&timeType=Part%20time,Full%20time
+Hydrotec: https://www.hydrotec.com/de/jobs-und-karriere
+Royal HaskoningDHV: https://www.haskoning.com/en/careers/vacancies?resultsPerPage=20&selectedFilters=country%3BGermany&pageNumber=1
+Hölscher Wasserbau GmbH: https://www.hoelscher-wasserbau.de/de/karriere/stellenangebote/
+BWS GmbH: https://bws-gmbh.de/jobs/
+Umwelttechnik & Wasserbau GmbH: https://karriere.uw.de/jobs
+HYDRO‑Ingenieure Energie & Wasser GmbH: https://www.hydro-ingenieure.de/karriere/stellenangebote/
+WESSLING GmbH: https://career.als-germany.com/
+Depenbrock Ingenieur‑ & Wasserbau: https://depenbrock.de/karriere/
+NAUE GmbH & Co. KG: https://career.naue.com/#jobs:careerLevel=%5B%22Student%2Fin%22%2C%22Auszubildende%22%5D
+Felbermayr Wasserbau Division: https://karriere.felbermayr.de/stellenboerse/?search=&area=&state=&company=
+GFA: https://www.gfa-group.de/jobs/index.html
+Dornier: https://www.dornier-group.com/en/career/job-vacancies/
+adelphi.: https://adelphi.de/en/career#jobs
 
-	1. ADM: https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25416&siteid=5429&PageType=searchResults&SearchType=linkquery&LinkID=4393911#keyWordSearch=student
-	2. DNV: https://jobs.dnv.com/job-search?country%5B0%5D=Germany&position_type%5B0%5D=Part%20Time&position_type%5B1%5D=Full%20Time&query=student
-	3. Tennet: https://careers.tennet.eu/en_US/careers/SearchJobs/?548=%5B7344%2C7341%2C7337%2C7342%2C7338%2C7339%2C7343%2C7336%2C1034206%5D&548_format=2793&listFilterMode=1&jobSort=schemaField_3_121_3&jobSortDirection=ASC&jobRecordsPerPage=6&
-	4. Dress ad Sommer: https://career.dreso.com/de/en/job-opportunities#entrylevel=53259c56-48bf-4716-8bf1-f3b8e62f84ce&jobarea=&country=&city=&timelimit=&corporateGroup=&query=
-	5. Arcadis: https://jobs.arcadis.com/careers?domain=arcadis.com&query=werkstudent&start=0&location=germany&pid=563671529977622&sort_by=relevance&filter_include_remote=1
-	6. WSP: https://www.wsp.com/de-de/karriere/stellenangebote?query=WERKSTUDENT&country=DE
-	7. Ramboll: https://www.ramboll.com/careers?locations=germany&career-stage=early-careers&free-text=werkstudent
-	8. Jacobs: http://careers.jacobs.com/en_US/careers/SearchJobs/werkstudent?4182=%5B76390%5D&4182_format=4422&listFilterMode=1&jobRecordsPerPage=10&
-	9. Sweco: https://www.sweco-gmbh.de/karriere/offene-stellen/?ppp=10&vacancies_level=6,5
-	10. Mott MacDonald: https://www.mottmac.com/en-europe/careers/explore-our-careers/?take=12&country=Germany
-	11. Fichtner: https://www.karriere.fichtner.de/stellenportal?filter[contractTypes]=2
-	12. Dorsch Gruppe: https://www.dorsch.com/de/karriere/jobs-in-deutschland/stellenangebote.html
-	13. INROS LACKNER: https://www.inros-lackner.de/en/career/job-vacancies
-	14. Björnsen Beratende Ingenieure: https://www.bjoernsen.de/karriere#praktikum=praktikum#studentischehilfskraft=studentischehilfskraft
-	15. IPROconsult: https://www.iproconsult.com/de/karriere/stellenangebote-und-bewerbungsprozess
-	16. Lahmeyer: http://dornier-group.com/en/career/job-vacancies/
-	17. HOCHTIEF AG: https://www.hochtief.de/karriere/studierende
-	18. Züblin STRABAG: https://jobboerse.strabag.at/jobs-overview.php?search=werkstudent
-	19. PORR: https://career.porr-group.com/jobs?q=werkstudent&tx_solr%5Bfilter%5D%5B0%5D=country%3AGermany#tx-solr-results 
-	20. HAMBURG WASSER: https://www.hamburgwasser.de/karriere/offene-stellen?einstieg=studierende#c1412
-	21. https://www.bjoernsen.de/karriere
-	22. Emschergenossenschaft: https://recruitingapp-5115.de.umantis.com/Jobs/1?lang=ger&CompanyID=1&Reset=G&ContentOnly=
-	23. Veolia Deutschland: https://jobs.veolia.de/stellenangebote.html?utm_source=veolia_de_karriere&utm_medium=referral
-	24. SUEZ Deutschland: https://hris-suez.csod.com/ux/ats/careersite/10/home?c=hris-suez&lq=Germany&lang=en-GB
-	25. BAM Deutschland: https://www.bam.de/Navigation/EN/About-us/Jobs-and-Careers/Young-Science/students/Bachelor-master-thesis-internships/bachelor-master-thesis-internships.html
-	26. Gelsenwasser: https://www.gelsenwasser.de/unternehmen/arbeiten-bei-gelsenwasser/stellenangebote
-	27. Hapag-Lloyd Research: https://www.hapag-lloyd.com/en/company/career/vacancies/jobsearch.html
-	28. Fugro Germany: https://www.fugro.com/careers/jobs?searchTerm=WERKSTUDENT 
-	29. Ökoplan : https://job.bhf-ki.de/#jobs
-	30. Hydrotec: https://www.hydrotec.com/de/jobs-und-karriere 
-	31. AECOM: https://aecom.jobs/locations/deu/jobs/
-	32. Energy Office AG: https://www.energiekontor.de/karriere/studentinnen-und-praktikantinnen-wind-in-bremen.html
-	33. Frenzelit GmbH: https://jobs.frenzelit.com/go/Studenten-&-Absolventen/8633702/
-	34. HAMBURG WASSER: https://www.hamburgwasser.de/karriere/offene-stellen?einstieg=studierende#c1412
-	35. Royal HaskoningDHV: https://www.haskoning.com/en/careers/vacancies?resultsPerPage=20&selectedFilters=country%3BGermany&pageNumber=1
-	36. McKinsey: http://mckinsey.com/careers/search-jobs?countries=Germany&query=intern
-	37. Peschla + Rochmes GmbH: https://www.gpr.de/karriere/stellenangebote/
-	38. ACCON GmbH: https://www.accon.de/ 
-	39.  Roland Berger: https://www.rolandberger.com/de/Join/All-Jobs/
-	40. Umweltcluster Bayern: https://www.umweltcluster.net/de/mitglieder/jobportal.html 
-	41. Clevercity: https://www.cleverciti.com/en/careers#freshteam-widget
-	42. Climate Alliance: https://www.climatealliance.org/about-us/carreers/
-	43. DEKRA: https://careers.dekra.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_country=DE&optionsFacetsDD_facility=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield5=
-	44. Dornier: https://www.dornier-group.com/en/career/job-vacancies/
-	45. Ecofys : https://www.agora-energiewende.de/ueber-uns/ihre-karriere-bei-agora-energiewende#c372
-	46. Fraunhofer IAO: https://jobs.fraunhofer.de/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=Studentische+Hilfskr%C3%A4fte&optionsFacetsDD_customfield2=&optionsFacetsDD_customfield3=&optionsFacetsDD_customfield5=Hamburg&optionsFacetsDD_customfield4=&optionsFacetsDD_lang=&locale=en_US
-	47. Frost & Sullivan: https://frostsullivan.bamboohr.com/careers
-	48. Ghorfa: https://www.ghorfa.de/de/stellenangebote/praktika/
-	49. Railistics GmbH: https://railistics.com/de/ueber-uns/karriere/
-	50. adelphi.: https://adelphi.de/en/career#jobs
-	51. GFA: https://www.gfa-group.de/jobs/index.html
-	52. Eurofins: https://careers.eurofins.com/de/jobs/ 
-	53. BCE Ingenieurgesellschaft: https://bce-ing.de/stellenangebote.html
-	54. Hölscher Wasserbau GmbH: https://www.hoelscher-wasserbau.de/de/karriere/stellenangebote/
-	55. Forschungszentrum Jülich: https://www.fz-juelich.de/de/karriere/stellenangebote?targetGroup=studierende
-	56. Stadtentwässerungsbetriebe Köln: https://steb-koeln.de/karriere/aktuelle-stellenausschreibungen/aktuelle-stellenausschreibungen-detailseite.jsp?jobid=251
-	57. Fichtner Water & Transportation GmbH: https://www.karriere.fichtner.de/stellenportal?filter[countries]=24&filter[contractTypes]=2
-	58. Fugro Germany Land GmbH: https://www.fugro.com/careers/jobs?locations.countries=Germany&timeType=Part%20time,Full%20time
-	59. BWS GmbH : https://bws-gmbh.de/jobs/
-	60. Umwelttechnik & Wasserbau GmbH: https://karriere.uw.de/jobs
-	61. NAUE GmbH & Co. KG: https://career.naue.com/#jobs:careerLevel=%5B%22Student%2Fin%22%2C%22Auszubildende%22%5D
-	62. Felbermayr Wasserbau Division: https://karriere.felbermayr.de/stellenboerse/?search=&area=&state=&company=
-	63. Strabag Wasserbau GmbH: https://jobboerse.strabag.at/jobs-overview.php?language=DE_EN
-	64. HYDRO‑Ingenieure Energie & Wasser GmbH: https://www.hydro-ingenieure.de/karriere/stellenangebote/
-	65. WESSLING GmbH: https://career.als-germany.com/
-	66. M&P Water Engineering Company: https://job.siera-alliance.com/karriere/
-	67. Depenbrock Ingenieur‑ & Wasserbau: https://depenbrock.de/karriere/ 
-	68. JH AG: https://www.jungheinrich.com/karriere/jobs 
-	69. Köster GmbH: https://www.koester-bau.de/karriere/stellenangebote.html
-	70. GETEC Energie: https://getec-energie-gmbh.jobs.personio.de/?filters=eyJlbXBsb3ltZW50X3R5cGUiOlsid29ya2luZ19zdHVkZW50Il19
-	71. NOTUS energy Plan GmbH & Co.KG: https://notus-portal.rexx-systems.com/
-	72. rhenag Rheinische Energie AG: https://karriere.rhenag.de/#jobs
+# Water utilities and environment (existing, kept)
+HAMBURG WASSER: https://www.hamburgwasser.de/karriere/offene-stellen?einstieg=studierende#c1412
+Emschergenossenschaft: https://recruitingapp-5115.de.umantis.com/Jobs/1?lang=ger&CompanyID=1&Reset=G&ContentOnly=
+Veolia Deutschland: https://jobs.veolia.de/stellenangebote.html?utm_source=veolia_de_karriere&utm_medium=referral
+Gelsenwasser: https://www.gelsenwasser.de/unternehmen/arbeiten-bei-gelsenwasser/stellenangebote
+Stadtentwässerungsbetriebe Köln: https://steb-koeln.de/karriere/aktuelle-stellenausschreibungen/aktuelle-stellenausschreibungen-detailseite.jsp?jobid=251
+
+# Project management, HSE and corporate (existing, kept)
+ADM: https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25416&siteid=5429&PageType=searchResults&SearchType=linkquery&LinkID=4393911#keyWordSearch=student
+DNV: https://jobs.dnv.com/job-search?country%5B0%5D=Germany&position_type%5B0%5D=Part%20Time&position_type%5B1%5D=Full%20Time&query=student
+Tennet: https://careers.tennet.eu/en_US/careers/SearchJobs/?548=%5B7344%2C7341%2C7337%2C7342%2C7338%2C7339%2C7343%2C7336%2C1034206%5D&548_format=2793&listFilterMode=1&jobSort=schemaField_3_121_3&jobSortDirection=ASC&jobRecordsPerPage=6&
+Dress ad Sommer: https://career.dreso.com/de/en/job-opportunities#entrylevel=53259c56-48bf-4716-8bf1-f3b8e62f84ce&jobarea=&country=&city=&timelimit=&corporateGroup=&query=
 Airbus: https://ag.wd3.myworkdayjobs.com/en-US/Airbus/details/Werkstudent--d-m-w--im-Business-Controlling_JR10395567-1?q=werkstudent&locations=f5811cef9cb501dc098bf16a4c0ae54a&locationCountry=dcc5b7608d8644b3a93716604e78e995
+DEKRA: https://careers.dekra.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_country=DE&optionsFacetsDD_facility=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield5=
+Köster GmbH: https://www.koester-bau.de/karriere/stellenangebote.html
+Energy Office AG: https://www.energiekontor.de/karriere/studentinnen-und-praktikantinnen-wind-in-bremen.html
+Forschungszentrum Jülich: https://www.fz-juelich.de/de/karriere/stellenangebote?targetGroup=studierende
+Fraunhofer IAO: https://jobs.fraunhofer.de/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=Studentische+Hilfskr%C3%A4fte&optionsFacetsDD_customfield2=&optionsFacetsDD_customfield3=&optionsFacetsDD_customfield5=Hamburg&optionsFacetsDD_customfield4=&optionsFacetsDD_lang=&locale=en_US
+
+# Coastal and marine research, authorities and consultancies (new)
 BAW Bundesanstalt für Wasserbau: https://www.bav.bund.de/SiteGlobals/Forms/Archiv/OffeneStellen/suche_form.html?resourceId=2043728&input_=1996522&pageLocale=de&oneOfTheseWords=&cl2Location_Bundesland=&cl2Location_Bezeichnung=BundesanstaltfuerWasserbau&cl2Location_Bezeichnung.GROUP=1&city_zipcode=&umkreis=&umkreis.GROUP=1&submit=Senden
 BSH Stellenangebote: https://www.bsh.de/DE/Das_BSH/BSH_als_Arbeitgeber/Stellenangebote/stellenangebote_node.html
 BSH Praktikum: https://www.bsh.de/DE/Das_BSH/BSH_als_Arbeitgeber/Praktikum/praktikum_node.html
@@ -84,6 +86,9 @@ Hereon: https://www.hereon.de/cms60/career/index.php.de
 GEOMAR: https://www.geomar.de/karriere-campus/karriere/stellenangebote
 GEOMAR Praktikum: https://www.geomar.de/service/karriere/praktikum
 AWI: https://www.awi.de/arbeiten-lernen.html
+DKRZ: https://www.dkrz.de/en/about-en/vacancies
+MPI Meteorologie: https://mpimet.mpg.de/en/career/job-opportunities
+TU Hamburg Stellen: https://www.tuhh.de/tuhh/en/tu-hamburg/working-at-tu-hamburg/job-opportunities
 DHI: https://www.dhigroup.com/careers/open-positions
 Deltares: https://careers.deltares.nl/en/home
 HR Wallingford: https://www.hrwallingford.com/job-opportunities
@@ -91,173 +96,33 @@ Witteveen+Bos: https://www.witteveenbos.com/career/vacancies
 Boskalis Student Starter: https://careers.boskalis.com/student-starter
 Boskalis Practical Internship: https://careers.boskalis.com/practical-internship
 DEME: https://www.deme-group.com/jobs
-Orsted Vacancies: https://orsted.com/en/careers/vacancies-list
-Orsted Students: https://orsted.com/en/careers/early-careers/student-opportunities
-1. HAMBURG WASSER
-Focus: Drinking water, wastewater, treatment, water quality and infrastructure
-CAREERS / JOBS: https://www.hamburgwasser.de/karriere
 
-2. CONSULAQUA
-Focus: Water consultancy, groundwater, water resources and engineering
-CAREERS / JOBS: https://www.consulaqua.de/karriere/
+# Environment, climate and public sector (new)
+Stadt Hamburg Werkstudent:in: https://www.karriere.hamburg/einstiegsmoeglichkeiten/werkstudentin
+Umweltbundesamt Praktikum: https://www.umweltbundesamt.de/das-uba/das-uba-als-arbeitgeber/praktikum
+Bundesumweltministerium Praktikum: https://jobs.bundesumweltministerium.de/go/F%C3%BCr-Praktikum/9505155/
+Bundesumweltministerium Stellen: https://www.bundesumweltministerium.de/ministerium/stellenausschreibungen
+Greenpeace: https://jobs.greenpeace.de/
+Greenpeace Praktikum: https://jobs.greenpeace.de/o/praktikum
+ERM: https://erm.wd3.myworkdayjobs.com/en-US/ERM_Careers
+TÜV NORD Studierende: https://www.tuev-nord-group.com/en/career/your-entry-opportunities/students/
+TÜV NORD Jobs: https://www.tuev-nord-group.com/de/karriere/jobs/
 
-3. BWS GmbH
-Focus: Water management, hydraulic engineering, measurements and modelling
-CAREERS / JOBS: https://bws-gmbh.de/jobs/
+# Energy, offshore wind and industry with HSE and environment roles (new)
+Ørsted: https://orsted.com/en/careers/vacancies-list
+Ørsted Students: https://orsted.com/en/careers/early-careers/student-opportunities
+Uniper Students: https://jobs.uniper.energy/go/Students/4452401/
+Uniper Jobboard: https://careers.uniper.energy/en
+Aurubis: https://jobs.aurubis.com/
+Holcim: https://careers.holcimgroup.com/go/Alle-Stellenangebote/8791002/
+Bilfinger Studierende: https://jobs.bilfinger.com/go/Ihre-Stelle-als-Sch%C3%BCler-&-Student/2889801/
+Bilfinger Berufseinsteiger: https://jobs.bilfinger.com/go/Alle-Berufseinsteiger-Jobs/4567701/
+Beiersdorf: https://www.beiersdorf.com/career/your-application/job-search?level=Bachelor%2FMaster%2CWorking+Student%2CInternship&count=10&sort=date
+Lufthansa Technik Studierende: https://www.lufthansa-technik.com/en/entry-opportunities-for-students
 
-4. Arcadis
-Focus: Water resilience, climate adaptation, flood protection and hydraulic engineering
-CAREERS / JOBS: https://careers.arcadis.com/
-
-5. Sweco
-Focus: Water and wastewater engineering, environmental planning and infrastructure
-CAREERS / JOBS: https://www.sweco-gmbh.de/karriere/offene-stellen/
-
-6. Ramboll
-Focus: Water, ports, environmental consultancy and adaptation; check team location
-CAREERS / JOBS: https://de.ramboll.com/en-gb/careers
-
-7. Fichtner Water & Transportation
-Focus: Water infrastructure, environmental planning and engineering
-CAREERS / JOBS: https://www.karriere.fichtner.de/
-
-8. Neumann - Beratende Ingenieure
-Focus: Water management, hydraulic and environmental engineering
-CAREERS / JOBS: https://www.neumann-ing.de/stellenangebote.php
-
-9. Ingenieurgesellschaft von Lieberman
-Focus: Coastal and hydraulic engineering, geotechnics and project coordination
-CAREERS / JOBS: https://vonlieberman.de/karriere/
-
-10. IGB Ingenieurgesellschaft
-Focus: Hydraulic engineering, environmental engineering and geotechnics
-CAREERS / JOBS: https://www.igb-ingenieure.de/karriere
-
-11. WTM Engineers
-Focus: Hydraulic structures and civil engineering
-CAREERS / JOBS: https://www.wtm-engineers.de/karriere/
-
-12. WaCo Wassertechnik Consult
-Focus: Industrial water and energy management, resource efficiency
-WEBSITE / CONTACT: https://www.wassertech.de/
-
-13. Lifetec-Systems
-Focus: Water, wastewater, waste and environmental process engineering
-WEBSITE / CONTACT: https://www.lifetec-systems.de/
-
-14. HSVA
-Focus: Private applied hydrodynamic research, model testing and maritime technology
-CAREERS / JOBS: https://www.hsva.de/company/jobs/
-
-ENVIRONMENT AND CIRCULAR ECONOMY
-
-15. Mull und Partner / M&P
-Focus: Environmental consultancy, contaminated sites, geoinformation and water-related projects
-CAREERS / JOBS: https://mullundpartner.de/arbeiten-bei-mp/
-
-16. EGL
-Focus: Environmental planning, ecological surveys and construction supervision
-CAREERS / JOBS: https://egl-plan.de/jobs/
-
-17. Planula GmbH
-Focus: Nature conservation, landscape ecology, surveys and environmental data
-WEBSITE / CONTACT: https://planula.de/
-
-18. Ökopol
-Focus: Environmental research, resource management and chemicals policy
-WEBSITE / CONTACT: https://oekopol.de/
-
-19. UMCO
-Focus: Environmental protection, chemical compliance and hazardous substances
-CAREERS / JOBS: https://www.umco.de/unternehmen/karriere.html
-
-20. EPEA
-Focus: Circular economy, sustainable materials and Cradle to Cradle
-CAREERS / JOBS: https://www.epea.com/ueber-uns/karriere
-
-21. Hamburg Institut / HIC Consulting
-Focus: Climate protection, energy transition, applied research and consultancy
-CAREERS / JOBS: https://www.hamburg-institut.com/karriere/
-
-22. HiiCCE
-Focus: Applied research and consultancy in circular economy, waste and resources
-WEBSITE / CONTACT: https://www.hiicce.de/
-
-Related recruitment portal (Stadtreinigung Hamburg; search HiiCCE): https://www.stadtreinigung.hamburg/jobs/
-
-23. Stadtreinigung Hamburg
-Focus: Waste management, recycling, environmental management and climate protection
-CAREERS / JOBS: https://www.stadtreinigung.hamburg/jobs/
-
-24. Eurofins Umwelt Nord
-Focus: Environmental sampling and analysis; check Hamburg branch and laboratory
-CAREERS / JOBS: https://careers.smartrecruiters.com/eurofins
-
-RESEARCH INSTITUTES AND PUBLIC EMPLOYERS
-
-25. Max Planck Institute for Meteorology
-Focus: Climate, Earth systems, ocean-atmosphere processes and modelling
-CAREERS / JOBS: https://mpimet.mpg.de/en/career/job-opportunities
-
-26. DKRZ
-Focus: Climate data, scientific computing, research software and data infrastructure
-CAREERS / JOBS: https://www.dkrz.de/de/about/stellenangebote
-
-27. GERICS (Hereon)
-Focus: Climate services and adaptation; Hamburg unit of Hereon
-CAREERS / JOBS: https://www.hereon.eu/career/index.php.en
-
-Use the Hereon portal and check for Hamburg / GERICS positions.
-
-28. Fraunhofer CML
-Focus: Applied maritime research, data, automation and sustainability
-CAREERS / JOBS: https://www.cml.fraunhofer.de/de/jobsundkarriere.html
-
-29. Center of Maritime Technologies
-Focus: Maritime research projects, technology and environmental protection
-CAREERS / JOBS: https://www.cmt-net.org/karriere/
-
-30. Senckenberg marine research
-Focus: Marine biodiversity and coastal/marine biology; confirm Hamburg work location
-CAREERS / JOBS: https://www.senckenberg.de/de/karriere/
-
-31. BSH
-Focus: Marine monitoring, coastal/ocean data and offshore environmental assessment; filter Hamburg
-CAREERS / JOBS: https://karriere.bund.de/die-bundesverwaltung/behoerden-und-organisationen/bundesamt-fuer-seeschifffahrt-und-hydrographie/17
-
-32. Hamburg Port Authority
-Focus: Hydraulic engineering, port infrastructure and environmental protection
-CAREERS / JOBS: https://www.hamburg-port-authority.de/de/karriere
-
-33. Institut für Hygiene und Umwelt
-Focus: Environmental laboratory work and monitoring
-CAREERS / JOBS: https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/hu/wir-ueber-uns/aktuelle-stellenangebote
-
-34. BUKEA environmental authority
-Focus: Water protection, regulation, climate and environmental administration
-CAREERS / JOBS: https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/karriere
-
-UNIVERSITIES IN HAMBURG
-
-35. TU Hamburg
-Focus: Environmental engineering, water-related research and scientific assistance
-CAREERS / JOBS: https://www.tuhh.de/iue/karriere
-
-36. Universität Hamburg
-Focus: Oceanography, climate, geography, marine biology and environmental research
-CAREERS / JOBS: https://www.uni-hamburg.de/stellenangebote/
-
-37. HafenCity Universität
-Focus: Hydrography, bathymetry, marine geodata and surveying
-WEBSITE / CONTACT: https://www.hcu-hamburg.de/en/bachelor/geo/organization/hydrography
-
-NEARBY EMPLOYERS - OUTSIDE HAMBURG
-
-38. Helmholtz-Zentrum Hereon - Geesthacht
-Focus: Coastal and marine research; main site outside Hamburg
-CAREERS / JOBS: https://www.hereon.eu/career/index.php.en
-
-39. EHP Umweltplanung - Pinneberg
-Focus: Water management and engineering; outside Hamburg
-CAREERS / JOBS: https://ehp-umweltplanung.de/karriere/
-
+# Ports and mobility in Hamburg (new)
+HHLA Jobs: https://hhla.de/en/career/job-advertisements
+HHLA Praktikum Werkstudent: https://hhla.de/en/career/career-starters/internship-working-student-position
+Eurogate: https://recruitingapp-346.de.umantis.com/Jobs/1?lang=ger
+Hochbahn Werkstudierende: https://www.hochbahn.de/de/karriere/studierende/werkstudierende
+Hochbahn Praktikum: https://www.hochbahn.de/de/karriere/studierende/praktikum
